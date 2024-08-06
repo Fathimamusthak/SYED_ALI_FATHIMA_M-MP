@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    </head>
+
+    <body>
+        <div class="top"><h1 >Student Database Management System</h1>
+
+        <div class="container">
+        <div class="left">
+            <h2>Student Registration</h2>
+            <form #myForm="ngForm">
+                    <div class="form-group">
+                        <label for="Student Id">
+                            Student Id
+                        </label>
+                        <input type="text" 
+                               class="form-control" 
+                               name="id" 
+                               #id="ngModel" ngModel
+                               required
+                               pattern="[0-9]+"
+
+                                />
+                    </div>
+                    <div *ngIf="id.touched">
+                      <div *ngIf="id.errors?.['required']">
+                        <b style="color: red;">Student Id is Required.</b>
+
+                      </div>
+                      <div *ngIf="id.errors?.['pattern']">
+                        <b color="red"><b>Invalid Student Id.</b></b>
+                      </div>
+                    </div>
+                <div class="form-group">
+                    <label for="Student Name">Student Name
+                    </label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="stuName" 
+                           #stuName="ngModel" ngModel
+                           required
+                           pattern="[A-Z,a-z]+"
+                            />
+                </div>
+                <div *ngIf="stuName.touched">
+                    <div *ngIf="stuName.errors?.['required']">
+                    <b style="color: red;">Student Name  Required.</b>
+                    </div>
+                    <div *ngIf="stuName.errors?. ['pattern']">
+                    <b color="red"><b>Invalid Student Name </b></b>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Student Age">
+                            Student Age
+                        </label>
+                        <input type="text" 
+                               class="form-control" 
+                               name="stuAge" 
+                               #stuAge="ngModel" ngModel
+                               required
+                               pattern="[0-9]+"
+                                />
+                                <div *ngIf="stuAge.touched">
+                                    <div *ngIf="stuAge.errors?.['required']">
+                                    <b style="color: red;">Student Age Required.</b>
+                                    </div>
+                                    <div *ngIf="stuAge.errors?. ['pattern']">
+                                    <b color="red"><b>Invalid Student Age</b></b>
+                                    </div>
+                                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=" Student Email">
+                            Student Email 
+                         </label>
+                        <input type="text" 
+                               class="form-control" 
+                               name="stuEmail" 
+                               #stuEmail="ngModel" ngModel
+                               required
+                               pattern="[A-Z,a-z,@,.]+"
+                               />
+                    </div>
+                    <div *ngIf="stuEmail.touched">
+                        <div *ngIf="stuEmail.errors?.['required']">
+                        <b style="color: red;"> Student Email Required.</b>
+                        </div>
+                        <div *ngIf="stuEmail.errors?. ['pattern']">
+                        <b color="red"><b>Invalid Student Email  </b></b>
+                        </div>
+                        </div>
+                        <br>
+
+                        <button class="btn btn-success" (click)="insertStudent(myForm.value)">
+                            Insert 
+                        </button>
+                    &nbsp;&nbsp;
+                        <button class="btn btn-primary" (click)="updateStudent(myForm.value)">
+                            Update 
+                        </button>&nbsp;&nbsp;
+                        <button class="btn btn-danger"  (click)="deleteStudent(myForm.value)">
+                            Delete 
+                        </button>&nbsp;&nbsp;
+                        <button class="btn btn-warning" (click)="findStudent(myForm.value)">
+                            Find 
+                        </button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-info" (click)="findAllStudent()">
+                            Find All
+                        </button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+ <br>
+ <h3>{{result}}</h3>
+ <br>
+ <br>
+ <div style="width: 100%;" *ngIf="flag">
+    <table width="80%" align="center" class="table table-borderd">
+     <tr><th>Student ID</th><th>Student Name</th><th>Student Age</th><th>Student Email</th></tr> 
+      <tr *ngFor="let stu of studentArr">
+        <td> {{stu.id}} </td> <td> {{stu.stuName}} </td><td> {{stu.stuAge}} </td><td> {{stu.stuEmail}} </td>
+      </tr>
+   </table>
+   </div>
+</body>
+</html>
+
